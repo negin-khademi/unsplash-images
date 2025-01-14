@@ -4,6 +4,7 @@ const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('iran');
 
   const toggleDarkTheme = () => {
     const newDarkTheme = !isDarkTheme;
@@ -14,7 +15,11 @@ export const AppProvider = ({ children }) => {
     console.log(body);
   };
 
-  return <AppContext.Provider value={{ isDarkTheme, toggleDarkTheme }}>{children}</AppContext.Provider>;
+  return (
+    <AppContext.Provider value={{ isDarkTheme, toggleDarkTheme, searchTerm, setSearchTerm }}>
+      {children}
+    </AppContext.Provider>
+  );
 };
 
 export const useGlobalContext = () => {
