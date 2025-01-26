@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useGlobalContext } from './context';
 import { useQuery } from '@tanstack/react-query';
 
-const url = 'https://api.unsplash.com/search/photos?client_id=BXJzyeID_-P3B04-R4akiRpO855PDUba-YbZ6o8ZEpA';
+const url = `https://api.unsplash.com/search/photos?client_id=${process.env.REACT_APP_API_KEY}`;
 
 const Gallery = () => {
   const { searchTerm } = useGlobalContext();
@@ -10,6 +10,7 @@ const Gallery = () => {
     queryKey: ['images', searchTerm],
     queryFn: async () => {
       const result = await axios.get(`${url}&query=${searchTerm}`);
+      console.log(process.env.REACT_APP_API_KEY);
       return result.data;
     },
   });
